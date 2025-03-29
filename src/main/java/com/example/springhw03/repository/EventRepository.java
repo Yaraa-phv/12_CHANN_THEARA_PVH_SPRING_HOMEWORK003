@@ -35,6 +35,7 @@ public interface EventRepository {
         RETURNING *
     """)
     @ResultMap("eventMapper")
+    @Result(property = "venueId", column = "venue_id", one = @One(select = "com.example.springhw03.repository.VenueRepository.getVenueById"))
     Event addNewEvent(@Param("request") EventRequest eventRequest);
 
     @Select("""

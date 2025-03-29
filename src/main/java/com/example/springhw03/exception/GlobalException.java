@@ -19,6 +19,7 @@ import java.util.Map;
 public class GlobalException {
 
     Map<String, String> errors = new HashMap<>();
+
     @ExceptionHandler(NotFoundException.class)
     public ProblemDetail handleNotFoundException(NotFoundException e){
         ProblemDetail problemDetail = ProblemDetail.forStatusAndDetail(HttpStatus.NOT_FOUND, e.getMessage());

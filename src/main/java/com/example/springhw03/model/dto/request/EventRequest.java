@@ -2,10 +2,8 @@ package com.example.springhw03.model.dto.request;
 
 import com.example.springhw03.model.entity.Attendee;
 import com.example.springhw03.model.entity.Venue;
-import jakarta.validation.constraints.FutureOrPresent;
-import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.NotEmpty;
-import jakarta.validation.constraints.Positive;
+import jakarta.validation.Valid;
+import jakarta.validation.constraints.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -20,9 +18,8 @@ public class EventRequest {
     @NotBlank(message = "EventName cannot be blank!")
     private String eventName;
 //    @NotBlank(message = "Venue cannot be blank!")
-//    @Positive
+    @NotNull(message = "Venue cannot be blank!")
     private Integer venueId;
-//    @NotBlank(message = "List of Attendees cannot be blank!")
-//    @Positive
+    @NotEmpty(message = "List of Attendees cannot be empty!")
     private List<Integer> attendeeId;
 }

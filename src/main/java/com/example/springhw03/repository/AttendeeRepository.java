@@ -86,4 +86,7 @@ public interface AttendeeRepository {
     """)
     @ResultMap("attendeeMapper")
     void updateEventAttendee(Integer eventId, Integer attendeeId);
+
+
+    List<Attendee> getAllAttendeesById(Integer attendeeId);
 }
