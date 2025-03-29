@@ -11,7 +11,7 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 public class Event {
-    private int eventId;
+    private Integer eventId;
     private String eventName;
     private LocalDateTime eventDate;
     private Venue venue;

@@ -8,7 +8,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class Venue {
-    private int venueId;
+    private Integer venueId;
     private String venueName;
     private String location;
 }

@@ -19,7 +19,7 @@ SELECT * FROM venues;
 CREATE TABLE events(
                        event_id SERIAL PRIMARY KEY ,
                        event_name VARCHAR NOT NULL ,
-                       event_date VARCHAR NOT NULL ,
+                       event_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP NOT NULL ,
                        venue_id INTEGER NOT NULL
                            CONSTRAINT fk_venues
                                REFERENCES venues
@@ -75,3 +75,19 @@ INSERT INTO event_attendee (event_id, attendee_id) VALUES
                                                        (3, 3);
 
 SELECT * FROM event_attendee;
+
+-- TESTING FOR REPO
+SELECT att.attendee_id, attendee_name, email FROM attendees att
+                                                      INNER JOIN event_attendee ett ON att.attendee_id = ett.attendee_id
+WHERE event_id = 15;
+
+INSERT INTO events(event_name, venue_id)
+VALUES ('FoundYouTouri', 1)
+RETURNING *;
+
+INSERT INTO event_attendee(event_id, attendee_id) VALUES (5, 1);
+INSERT INTO event_attendee(event_id, attendee_id) VALUES (5, 2);
+
+UPDATE events SET venue_id = 2 WHERE event_id = 15;
+
+DELETE FROM events WHERE event_id = 15;
