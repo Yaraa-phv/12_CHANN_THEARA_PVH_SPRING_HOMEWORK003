@@ -18,7 +18,7 @@ import java.util.Map;
 @RestControllerAdvice
 public class GlobalException {
 
-    Map<String, String> errors = new HashMap<>();
+//    Map<String, String> errors = new HashMap<>();
 
     @ExceptionHandler(NotFoundException.class)
     public ProblemDetail handleNotFoundException(NotFoundException e){
@@ -28,12 +28,13 @@ public class GlobalException {
         return problemDetail;
     }
 
+    //Handle with annotations of validation dependency
     @ExceptionHandler(HandlerMethodValidationException.class)
     public ProblemDetail handleMethodValidationException(HandlerMethodValidationException e) {
 
         ProblemDetail problemDetail = ProblemDetail.forStatus(HttpStatus.BAD_REQUEST);
         problemDetail.setTitle("Bad Request");
-//        Map<String, String> errors = new HashMap<>();
+        Map<String, String> errors = new HashMap<>();
 
         e.getParameterValidationResults().forEach(parameterErr -> {
             String paramName = parameterErr.getMethodParameter().getParameterName();
@@ -47,12 +48,13 @@ public class GlobalException {
         return problemDetail;
     }
 
+    //Handle Input from User
     @ExceptionHandler(MethodArgumentNotValidException.class)
     public ProblemDetail handleValidationErrors(MethodArgumentNotValidException e) {
         ProblemDetail problemDetail = ProblemDetail.forStatus(HttpStatus.BAD_REQUEST);
         problemDetail.setTitle("Bad Request");
 
-//        Map<String, String> errors = new HashMap<>();
+        Map<String, String> errors = new HashMap<>();
         for (FieldError error : e.getBindingResult().getFieldErrors()){
             errors.put(error.getField() + ": ", error.getDefaultMessage());
         }

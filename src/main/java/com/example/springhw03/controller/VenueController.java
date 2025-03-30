@@ -2,6 +2,8 @@ package com.example.springhw03.controller;
 
 import com.example.springhw03.model.dto.request.VenueRequest;
 import com.example.springhw03.model.dto.response.ApiResponse;
+import com.example.springhw03.model.dto.response.DeleteApiResponse;
+import com.example.springhw03.model.entity.Event;
 import com.example.springhw03.model.entity.Venue;
 import com.example.springhw03.service.VenueService;
 import io.swagger.v3.oas.annotations.Operation;
@@ -78,11 +80,11 @@ public class VenueController {
 
     @Operation(summary = "Delete venue by ID")
     @DeleteMapping("/{venue-id}")
-    public ResponseEntity<ApiResponse<Venue>> deleteVenueById(@PathVariable("venue-id") @Positive Integer venueId){
-        ApiResponse<Venue> response = ApiResponse.<Venue>builder()
+    public ResponseEntity<DeleteApiResponse<Venue>> deleteVenueById(@PathVariable("venue-id") @Positive Integer venueId){
+        venueService.deleteVenueById(venueId);
+        DeleteApiResponse<Venue> response = DeleteApiResponse.<Venue>builder()
                 .success(true)
                 .message("Delete a venue successfully!")
-                .payload(venueService.deleteVenueById(venueId))
                 .status(HttpStatus.OK)
                 .timestamp(LocalDateTime.now())
                 .build();

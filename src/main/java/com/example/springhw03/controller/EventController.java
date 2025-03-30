@@ -2,6 +2,7 @@ package com.example.springhw03.controller;
 
 import com.example.springhw03.model.dto.request.EventRequest;
 import com.example.springhw03.model.dto.response.ApiResponse;
+import com.example.springhw03.model.dto.response.DeleteApiResponse;
 import com.example.springhw03.model.entity.Attendee;
 import com.example.springhw03.model.entity.Event;
 import com.example.springhw03.service.EventService;
@@ -80,11 +81,11 @@ public class EventController {
 
     @Operation(summary = "Delete event by ID")
     @DeleteMapping("/{event-id}")
-    public ResponseEntity<ApiResponse<Event>> deleteVenueById(@PathVariable("event-id") @Positive Integer eventId){
-        ApiResponse<Event> response = ApiResponse.<Event>builder()
+    public ResponseEntity<DeleteApiResponse<Event>> deleteVenueById(@PathVariable("event-id") @Positive Integer eventId){
+        eventService.deleteEventById(eventId);
+        DeleteApiResponse<Event> response = DeleteApiResponse.<Event>builder()
                 .success(true)
                 .message("Delete an event successfully!")
-                .payload(eventService.deleteEventById(eventId))
                 .status(HttpStatus.OK)
                 .timestamp(LocalDateTime.now())
                 .build();

@@ -17,7 +17,9 @@ import java.util.List;
 public class EventRequest {
     @NotBlank(message = "EventName cannot be blank!")
     private String eventName;
-//    @NotBlank(message = "Venue cannot be blank!")
+//    @NotBlank(message = "EventDate cannot be blank!")
+//    @FutureOrPresent(message = "EventDate better be present or future!")
+    private LocalDateTime eventDate;
     @NotNull(message = "Venue cannot be blank!")
     private Integer venueId;
     @NotEmpty(message = "List of Attendees cannot be empty!")

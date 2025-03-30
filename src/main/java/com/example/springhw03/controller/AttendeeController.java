@@ -3,7 +3,9 @@ package com.example.springhw03.controller;
 import com.example.springhw03.model.dto.request.AttendeeRequest;
 import com.example.springhw03.model.dto.request.VenueRequest;
 import com.example.springhw03.model.dto.response.ApiResponse;
+import com.example.springhw03.model.dto.response.DeleteApiResponse;
 import com.example.springhw03.model.entity.Attendee;
+import com.example.springhw03.model.entity.Event;
 import com.example.springhw03.model.entity.Venue;
 import com.example.springhw03.service.AttendeeService;
 import io.swagger.v3.oas.annotations.Operation;
@@ -80,11 +82,11 @@ public class AttendeeController {
 
     @Operation(summary = "Delete attendee by ID")
     @DeleteMapping("/{attendee-id}")
-    public ResponseEntity<ApiResponse<Attendee>> deleteVenueById(@PathVariable("attendee-id") @Positive Integer attendeeId){
-        ApiResponse<Attendee> response = ApiResponse.<Attendee>builder()
+    public ResponseEntity<DeleteApiResponse<Attendee>> deleteVenueById(@PathVariable("attendee-id") @Positive Integer attendeeId){
+        attendeeService.deleteAttendeeById(attendeeId);
+        DeleteApiResponse<Attendee> response = DeleteApiResponse.<Attendee>builder()
                 .success(true)
                 .message("Delete an attendee successfully!")
-                .payload(attendeeService.getAttendeeById(attendeeId))
                 .status(HttpStatus.OK)
                 .timestamp(LocalDateTime.now())
                 .build();
